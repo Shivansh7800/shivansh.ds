@@ -1,0 +1,58 @@
+
+item_to_remove = 30
+
+print("Original Array:", arr)
+arr = remove_item(arr, item_to_remove)
+print("Array after removal:", arr)
+Output:
+pgsql
+Copy
+Original Array: [10, 20, 30, 40, 50]
+Array after removal: [10, 20, 40, 50]
+C Program to Remove an Item from an Array
+In C, arrays are static, so you can't directly "remove" an element without shifting all the elements. The procedure will involve shifting elements after removing the item.
+
+c
+Copy
+#include <stdio.h>
+
+// Function to remove an item from the array
+void remove_item(int arr[], int *size, int item) {
+    int i, j;
+    // Search for the item
+    for (i = 0; i < *size; i++) {
+        if (arr[i] == item) {
+            // Shift elements to the left
+            for (j = i; j < *size - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+            (*size)--;  // Reduce the size of the array
+            return;  // Exit the function once the item is removed
+        }
+    }
+    printf("Item not found in array\n");
+}
+
+// Function to print the array
+void print_array(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int item_to_remove = 30;
+
+    printf("Original Array: ");
+    print_array(arr, size);
+
+    remove_item(arr, &size, item_to_remove);
+
+    printf("Array after removal: ");
+    print_array(arr, size);
+
+    return 0;
+}
